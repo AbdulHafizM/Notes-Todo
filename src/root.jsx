@@ -8,7 +8,7 @@ const Root = () => {
             <li className='li'><Link to='/todo'><i className='types-icon icons'>T</i></Link></li>
         </ul>
       </div>
-      <div>
+      <div className="content-container">
         <Outlet />
       </div>
     </>
