@@ -1,11 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-const NoteCard = ({title, time}) => {
+const NoteCard = ({item}) => {
+
+    const navigate = useNavigate()
     return(
-        <div className="note-card">
-            <div className="title">I have a dream</div>
-            <div><span>time</span></div>
-        </div>
+        <button className="note-card" onClick={() => navigate(`/note/${item._id}`)}>
+            <div className="title">{
+                item.title == '' ? item.body.slice(0,12) + '...' : item.title
+            }</div>
+            <div><span>{item.createdAt}</span></div>
+        </button>
     )
 }
 

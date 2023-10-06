@@ -1,0 +1,32 @@
+.del-modal{
+    width: 200px;
+    height: 150px;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.del-modal h5{
+    font-size: 21px;
+    color: white;
+    margin: 5px 0;
+}
+.del-modal p{
+    color: white;
+    font-size: 19px;
+    margin: 10px 0;
+}
+.del-modal div{
+    width: 100%;
+}
+.del-modal div button:nth-child(1){
+    text-align: center;
+    padding: 5px 0;
+    width: 50%;
+}
+.del-modal div button:nth-child(2){
+    text-align: center;
+    padding: 5px 0;
+    color: red;
+    width: 50%;
+}
