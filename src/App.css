@@ -173,17 +173,49 @@ textarea{
   margin: 10px 0;
   font-size: 19px;
 }
+.share-text{
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.share-text > div:nth-child(1){
+  padding: 1em 0.5em;
+  background-color: #222527;
+  width: 70%;
+  height: 250px;
+  color: white;
+}
+
+.share-text > div:nth-child(2){
+  display: flex;
+  justify-self: flex-end;
+  justify-content: center;
+}
+.share-text div:nth-child(2) button{
+  outline: none;
+  border: none;
+  padding: 1em 2em;
+  background: #212426;
+  border-radius: 7px;
+  color: white;
+  font-size: 17px;
+}
+
 
 @media screen and (max-width: 600px){
+  .note{
+    height: 100%;
+  }
   .nav{
     position: fixed;
     bottom: 0;
     width: 100%;
     z-index: 10;
-    height: 70px;
+    height: 50px;
     padding: 0;
     margin: 0;
-    box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+    background-color: #686e72;
   }
   .nav ul{
     width: 40%;

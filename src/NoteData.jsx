@@ -22,7 +22,7 @@ const NoteData = ({id}) => {
                     <span>Notes</span>
                 </div>
                 <div>
-                    <button>sh</button>
+                    <button><Link to={`/note/share/${id}`}>sh</Link></button>
                     <button onClick={() => setIsOpen(true)}>D</button>
                 </div>
                 {}
