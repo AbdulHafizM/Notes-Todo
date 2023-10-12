@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './App.css'
 import axios from 'axios';
 import useSWR from 'swr';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { modalContext } from './App';
 import Modal from './components/Modal';
 
@@ -10,8 +10,20 @@ import Modal from './components/Modal';
 const fetcher = url => axios.get(url).then(({data}) => data);
 
 const NoteData = ({id}) => {
+    const navigate = useNavigate()
+    const [isFormActive, setIsFormActive] = useState(false)
     const {setIsOpen} = useContext(modalContext)
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
+    const [title, setTitle] = useState(noteData?.note.title)
+    const [body, setBody] = useState(noteData?.note.body)
+    const handleSubmit = async() => {
+        try{
+            const data = await axios.patch(`/api/v1/notes/${id}`, {title: title, body: body})
+            navigate('/')
+        }catch(err){
+            console.log(err)
+        }
+    }
     return(
         <>
         <div className="add-note">
@@ -22,18 +34,31 @@ const NoteData = ({id}) => {
                     <span>Notes</span>
                 </div>
                 <div>
+                    {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
                     <button><Link to={`/note/share/${id}`}>sh</Link></button>
                     <button onClick={() => setIsOpen(true)}>D</button>
+                    </>
+                    }
                 </div>
                 {}
             </div>
             <p>{noteData?.note.createdAt}</p>
             <input type="text" 
-            value={noteData?.note.title} onChange={()=>{}}
+            value={title} onChange={(e)=>{
+                setTitle(e.target.value)
+                setIsFormActive(true)
+            }}
+            onFocus={()=> setIsFormActive(true)}
+            onBlur={()=> setIsFormActive(false)}
             placeholder='Title'
             />
-            <textarea value={noteData?.note.body} 
-            onChange={(e)=>{}}
+            <textarea value={body} 
+            onChange={(e)=>{
+                setBody(e.target.value)
+                setIsFormActive(true)
+            }}
+            onFocus={()=> setIsFormActive(true)}
+            onBlur={()=> setIsFormActive(false)}
             placeholder='Note something down'
             ></textarea>
         </div>
