@@ -16,7 +16,7 @@ const CreateNote = () => {
                     navigate('/')
                 }).catch(err => notifyErr(err.msg))
             }
-            notifyPromise(sendData)
+            notifyPromise(sendData, 'saving', 'save')
     }
     return(
         <div className="add-note">

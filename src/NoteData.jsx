@@ -16,7 +16,14 @@ const NoteData = ({id}) => {
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     const [title, setTitle] = useState(noteData?.note.title)
     const [body, setBody] = useState(noteData?.note.body)
-    
+    const handleSubmit = async() => {
+        const sendData = async() => {
+            await axios.patch(`/api/v1/notes/${id}`).then((res)=>{
+                navigate('/')
+            })
+        }
+        notifyPromise(sendData, 'saving', save)
+    }
     return(
         <>
         <div className="add-note">
@@ -27,7 +34,7 @@ const NoteData = ({id}) => {
                     <span>Notes</span>
                 </div>
                 <div>
-                    {isFormActive ? <button onClick={()=> console.log('patchhh')}>save</button> : <>
+                    {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
                     <button><Link to={`/note/share/${id}`}>sh</Link></button>
                     <button onClick={() => setIsOpen(true)}>D</button>
                     </>

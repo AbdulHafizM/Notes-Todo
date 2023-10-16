@@ -34,7 +34,7 @@ const Modal = ({title, id}) => {
                 setIsOpen(false)
             })
         }
-        notifyPromise(sendData)
+        notifyPromise(sendData, 'deleting', 'delete')
     }
     return ReactDOM.createPortal(
         <>

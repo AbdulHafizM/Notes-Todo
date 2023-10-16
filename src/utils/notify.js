@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify'
 
-const notifyPromise = async(func) => {
+const notifyPromise = async(func,text1, text2) => {
     const response = await toast.promise(
         func,
         {
-          pending: 'saving note..',
-          success: 'save successful 👌',
-          error: 'save failed 🤯'
+          pending: `${text1} note..`,
+          success: `${text2} successful 👌`,
+          error: `${text2} failed 🤯`
         },
         {
             position: "top-center",
