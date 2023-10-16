@@ -5,7 +5,6 @@ import NoteData from './NoteData';
 
 
 const DisplayNote = () => {
-    console.log('hiiii')
     const {NoteId} = useParams()
     return(
         <Suspense fallback={<h1>Loading....</h1>}> 

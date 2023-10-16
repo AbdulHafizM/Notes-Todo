@@ -1,21 +1,22 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom'
+import {notifySuccess, notifyErr, notifyPromise} from './utils/notify';
+
+
 
 const CreateNote = () => {
     const navigate = useNavigate()
     const [title, setTitle] = useState('')
     const [note, setNote] = useState('')
-    const [msg, setMsg] = useState()
     const handleSubmit = async() => {
-        try{
-            const data = await axios.post('/api/v1/notes', {title: title, body: note})
-            setMsg('Note created')
-            navigate('/')
-        }catch(err){
-            console.log(err)
-        }
+            const sendData = async() => {
+                await axios.post('/api/v1/notes', {title: title, body: note}).then((res)=>{
+                    navigate('/')
+                }).catch(err => notifyErr(err.msg))
+            }
+            notifyPromise(sendData)
     }
     return(
         <div className="add-note">

@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { Link,useNavigate } from 'react-router-dom';
 import { modalContext } from './App';
 import Modal from './components/Modal';
-
+import { notifySuccess, notifyErr, notifyPromise } from './utils/notify';
 
 const fetcher = url => axios.get(url).then(({data}) => data);
 
@@ -16,14 +16,7 @@ const NoteData = ({id}) => {
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     const [title, setTitle] = useState(noteData?.note.title)
     const [body, setBody] = useState(noteData?.note.body)
-    const handleSubmit = async() => {
-        try{
-            const data = await axios.patch(`/api/v1/notes/${id}`, {title: title, body: body})
-            navigate('/')
-        }catch(err){
-            console.log(err)
-        }
-    }
+    
     return(
         <>
         <div className="add-note">
@@ -34,7 +27,7 @@ const NoteData = ({id}) => {
                     <span>Notes</span>
                 </div>
                 <div>
-                    {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
+                    {isFormActive ? <button onClick={()=> console.log('patchhh')}>save</button> : <>
                     <button><Link to={`/note/share/${id}`}>sh</Link></button>
                     <button onClick={() => setIsOpen(true)}>D</button>
                     </>

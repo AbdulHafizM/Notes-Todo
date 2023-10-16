@@ -4,6 +4,7 @@ import './modal.css'
 import { modalContext } from "../App"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { notifySuccess, notifyErr, notifyPromise } from "../utils/notify"
 
 const ModalStyles = {
     position: 'fixed',
@@ -26,6 +27,15 @@ const Modal = ({title, id}) => {
     const {isOpen, setIsOpen} = useContext(modalContext)
     console.log(isOpen)
     if(!isOpen) return null
+    const handleDelete = async() => {
+        const sendData = async() => {
+            await axios.post(`/api/v1/notes/${id}`).then((res)=>{
+                navigate('/')
+                setIsOpen(false)
+            })
+        }
+        notifyPromise(sendData)
+    }
     return ReactDOM.createPortal(
         <>
             <div style={OverlayStyle} onClick={()=> setIsOpen(false)}></div>
@@ -34,12 +44,7 @@ const Modal = ({title, id}) => {
                 <p>Are you sure you want to delete "{title}" note?</p>
                 <div>
                     <button onClick={() => setIsOpen(false)}>CANCEL</button>
-                    <button onClick={async()=>{
-                        await axios.post(`/api/v1/notes/${id}`)
-                        console.log('note deletion successful')
-                        navigate('/')
-                        setIsOpen(false)
-                    }}>DELETE</button>
+                    <button onClick={handleDelete}>DELETE</button>
                 </div>
             </div>
         </>,

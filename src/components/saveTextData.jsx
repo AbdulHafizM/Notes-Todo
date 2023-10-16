@@ -15,7 +15,7 @@ const SaveTextData = ({id}) => {
         <div className="share-text">
             <div ref={exportRef}>
                 {`
-                ${noteData.note.title}
+                ${noteData.note.title + "   "}
                 ${noteData.note.body}
                 `}
             </div>

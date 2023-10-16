@@ -17,7 +17,6 @@ export const modalContext = createContext()
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
-  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Root/>}>
