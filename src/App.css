@@ -11,6 +11,7 @@
 :root {
   --font-roboto: "Roboto Slab", serif;
   --font-raleway: "Raleway", sans-serif;
+  --toastify-color-success: #66b668;
 }
 
 body {
@@ -215,7 +216,27 @@ textarea{
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 300px){
+  .body{
+    font-size: 19px;
+  }
+  .search{
+    width: 100%;
+ }
+ .search input{
+  padding: 0.5em 1em;
+ }
+ .search img{
+  width: 25px;
+  height: 25px;
+ }
+ .note-card{
+  border-radius: 7px;
+  margin: 5px 0;
+  padding: 0.6em;
+ }
+}
+@media screen and (max-width: 700px){
   .note{
     height: 100%;
   }
@@ -227,7 +248,7 @@ textarea{
     height: 50px;
     padding: 0;
     margin: 0;
-    background-color: #686e72;
+    background-color: transparent;
   }
   .nav ul{
     width: 40%;
@@ -238,9 +259,16 @@ textarea{
   }
   .note{
     width: 100%;
-    height: calc(95vh - 70px);
+    height: calc(100vh - 50px);
   }
   .search{
     width: 100%;
+  }
+  .share-text{
+    padding: 0.6em;
+  }
+  .share-text > div:nth-child(1){
+    width: 100%;
+    padding: 0.5em;
   }
 }

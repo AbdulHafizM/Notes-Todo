@@ -13,11 +13,10 @@ const SaveTextData = ({id}) => {
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     return(
         <div className="share-text">
-            <div ref={exportRef}>
-                {`
-                ${noteData.note.title + "   "}
-                ${noteData.note.body}
-                `}
+            <div ref={exportRef} className="text-holder">
+                <p>{noteData.note.title}</p>
+                <p></p>
+                <p>{noteData.note.body}</p>
             </div>
             <div className="select-color">
                 {

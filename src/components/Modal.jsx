@@ -25,7 +25,6 @@ const OverlayStyle = {
 const Modal = ({title, id}) => {
     const navigate = useNavigate()
     const {isOpen, setIsOpen} = useContext(modalContext)
-    console.log(isOpen)
     if(!isOpen) return null
     const handleDelete = async() => {
         const sendData = async() => {

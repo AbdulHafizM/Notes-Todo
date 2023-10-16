@@ -6,6 +6,13 @@ import { Link,useNavigate } from 'react-router-dom';
 import { modalContext } from './App';
 import Modal from './components/Modal';
 import { notifySuccess, notifyErr, notifyPromise } from './utils/notify';
+import {dateFormatter, timeFormatter} from './utils/dateFormatter';
+
+const dateStyle = {
+    fontSize: '14px',
+    color: '#fff',
+    padding: '0.3em'
+}
 
 const fetcher = url => axios.get(url).then(({data}) => data);
 
@@ -16,13 +23,13 @@ const NoteData = ({id}) => {
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     const [title, setTitle] = useState(noteData?.note.title)
     const [body, setBody] = useState(noteData?.note.body)
+    console.log(title)
     const handleSubmit = async() => {
         const sendData = async() => {
-            await axios.patch(`/api/v1/notes/${id}`).then((res)=>{
-                navigate('/')
-            })
+            await axios.patch(`/api/v1/notes/${id}`, {title: title, body: body})
         }
-        notifyPromise(sendData, 'saving', save)
+        notifyPromise(sendData, 'saving', 'save')
+        setIsFormActive(false)
     }
     return(
         <>
@@ -34,22 +41,21 @@ const NoteData = ({id}) => {
                     <span>Notes</span>
                 </div>
                 <div>
-                    {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
+                {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
                     <button><Link to={`/note/share/${id}`}>sh</Link></button>
                     <button onClick={() => setIsOpen(true)}>D</button>
                     </>
-                    }
+                }
                 </div>
-                {}
             </div>
-            <p>{noteData?.note.createdAt}</p>
+            <span style={dateStyle}>{dateFormatter(noteData?.note.createdAt)}</span>
+            <span style={dateStyle}>{timeFormatter(noteData?.note.createdAt)}</span>
             <input type="text" 
             value={title} onChange={(e)=>{
                 setTitle(e.target.value)
                 setIsFormActive(true)
             }}
             onFocus={()=> setIsFormActive(true)}
-            onBlur={()=> setIsFormActive(false)}
             placeholder='Title'
             />
             <textarea value={body} 
@@ -58,7 +64,6 @@ const NoteData = ({id}) => {
                 setIsFormActive(true)
             }}
             onFocus={()=> setIsFormActive(true)}
-            onBlur={()=> setIsFormActive(false)}
             placeholder='Note something down'
             ></textarea>
         </div>
