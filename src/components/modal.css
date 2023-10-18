@@ -24,6 +24,7 @@
     text-align: center;
     padding: 5px 0;
     width: 50%;
+    color: white;
 }
 .del-modal div button:nth-child(2){
     text-align: center;

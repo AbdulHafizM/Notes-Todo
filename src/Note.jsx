@@ -6,6 +6,7 @@ import NoteList from "./noteList"
 import searchIcon from './search.svg'
 import SearchList from "./components/searchList"
 import NotesIcon from '@mui/icons-material/Notes';
+import emptyStyle from "./utils/msgStyle"
 
 
 const Note = () => {
@@ -15,10 +16,10 @@ const Note = () => {
     }
     return (
         <div className="note">
-            <h1><NotesIcon sx={{color:'#fff'}}/><span>Notes</span></h1>
+            <h1><NotesIcon sx={{color:'#fff'}}/><span> </span><span>Notes</span></h1>
             <div className='search'>
                 <input
-                    placeholder=''
+                    placeholder='type key words'
                     value={searchTerm}
                     onChange={(e)=>{
                         setSearchTerm(e.target.value)
@@ -33,10 +34,10 @@ const Note = () => {
             <div className="res-container">
             {
                 searchTerm !== ''?
-                <Suspense fallback={<h1>loading...</h1>}>
+                <Suspense fallback={<span style={emptyStyle}>Searching...</span>}>
                     <SearchList searchTerm={searchTerm}/>
                 </Suspense> : 
-                <Suspense fallback={<h1>loading...</h1>}>
+                <Suspense fallback={<span style={emptyStyle}>Getting notes...</span>}>
                     <NoteList />
                 </Suspense>
             }

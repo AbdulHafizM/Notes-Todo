@@ -265,8 +265,9 @@ textarea{
     background-color: transparent;
   }
   .nav ul{
-    width: 40%;
+    width: 100%;
     flex-direction: row;
+    justify-content: center;
   }
   .content-container{
     padding: 0;
