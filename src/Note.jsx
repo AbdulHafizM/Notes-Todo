@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import NoteList from "./noteList"
 import searchIcon from './search.svg'
 import SearchList from "./components/searchList"
-
+import NotesIcon from '@mui/icons-material/Notes';
 
 
 const Note = () => {
@@ -15,7 +15,7 @@ const Note = () => {
     }
     return (
         <div className="note">
-            <h1>Notes</h1>
+            <h1><NotesIcon sx={{color:'#fff'}}/><span>Notes</span></h1>
             <div className='search'>
                 <input
                     placeholder=''

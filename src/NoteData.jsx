@@ -2,22 +2,28 @@ import React, {useContext, useState} from 'react';
 import './App.css'
 import axios from 'axios';
 import useSWR from 'swr';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { modalContext } from './App';
 import Modal from './components/Modal';
 import { notifySuccess, notifyErr, notifyPromise } from './utils/notify';
 import {dateFormatter, timeFormatter} from './utils/dateFormatter';
+import CheckIcon from '@mui/icons-material/Check';
+import ShareIcon from '@mui/icons-material/Share';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const dateStyle = {
     fontSize: '14px',
     color: '#fff',
     padding: '0.3em'
 }
+const topStyle = {
+    display: 'flex'
+}
 
 const fetcher = url => axios.get(url).then(({data}) => data);
 
 const NoteData = ({id}) => {
-    const navigate = useNavigate()
     const [isFormActive, setIsFormActive] = useState(false)
     const {setIsOpen} = useContext(modalContext)
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
@@ -36,14 +42,14 @@ const NoteData = ({id}) => {
         <div className="add-note">
             <Modal title={noteData.note.title} id={id}/>
             <div className="top">
-                <div>
-                    <button><Link to='/'>b</Link></button>
+                <div style={topStyle}>
+                    <Link to='/'><ArrowBackIcon sx={{color: '#fff'}}/></Link>
                     <span>Notes</span>
                 </div>
                 <div>
-                {isFormActive ? <button onClick={handleSubmit}>save</button> : <>
-                    <button><Link to={`/note/share/${id}`}>sh</Link></button>
-                    <button onClick={() => setIsOpen(true)}>D</button>
+                {isFormActive ? <button onClick={handleSubmit}><CheckIcon sx={{color: '#fff'}}/></button> : <>
+                    <button className='btn-share'><Link to={`/note/share/${id}`}><ShareIcon sx={{color: '#fff'}}/></Link></button>
+                    <button onClick={() => setIsOpen(true)}><DeleteIcon sx={{color: '#fff'}}/></button>
                     </>
                 }
                 </div>

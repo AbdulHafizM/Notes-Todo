@@ -5,6 +5,8 @@ import '../App.css'
 import {exportAsImage,downloadImage, shareImage} from "../utils/exportAsImage";
 import ColorPallete from "../utils/colorPallete";
 import '../App.css'
+import ShareIcon from '@mui/icons-material/Share';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const fetcher = url => axios.get(url).then(({data}) => data);
 
@@ -29,7 +31,7 @@ const SaveTextData = ({id}) => {
                 }
             </div>
             <div>
-                <button onClick={()=>{
+                <button className='btn-flex' onClick={()=>{
                         if(navigator.share){
                             navigator.share({
                                 text: `${noteData.note.title} ${noteData.note.body}`
@@ -41,15 +43,15 @@ const SaveTextData = ({id}) => {
                         }else{
                             console.log('Browser does not support API')
                         }
-                    }}>Share as text</button>
-                <button onClick={async()=> {
+                    }}><ShareIcon sx={{color: '#fff'}}/>Share as text</button>
+                <button className='btn-flex' onClick={async()=> {
                     const blob = await exportAsImage(exportRef.current)
                     shareImage(blob, 'note.png')
-                    }}>Share as image</button>
-                <button onClick={async() => {
+                    }}><ShareIcon sx={{color: '#fff'}}/>Share as image</button>
+                <button className='btn-flex' onClick={async() => {
                     const blob = await exportAsImage(exportRef.current)
                     downloadImage(blob, 'note')
-                    }}>Download image</button>
+                    }}><DownloadIcon sx={{color: '#fff'}}/>Download image</button>
             </div>
         </div>
     )

@@ -25,6 +25,18 @@ ul li{
 a{
   text-decoration: none;
 }
+button{
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.btn-share{
+  margin-right: 5px;
+}
+.btn-flex{
+  display: flex;
+  align-items: center;
+}
 .app{
   display: flex;
   flex-direction: row;
@@ -67,7 +79,9 @@ a{
   color: #fff;
   margin: 0.5em 0;
   font-weight: 600;
+  gap: 8px;
 }
+
 
 /*search bar*/
 .search{
@@ -270,5 +284,6 @@ textarea{
   .share-text > div:nth-child(1){
     width: 100%;
     padding: 0.5em;
+    height: 300px;
   }
 }
