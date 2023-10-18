@@ -196,9 +196,9 @@ textarea{
 
 .share-text > div:nth-child(1){
   padding: 1em 0.5em;
-  background-color: #222527;
+  background-color: #1c1d1f;
   width: 70%;
-  height: 50%;
+  min-height: 63%;
   color: white;
 }
 
@@ -218,12 +218,13 @@ textarea{
 
 .select-color{
   display: flex;
+  flex-direction: row;
   padding: 0.5em;
 }
 .box-select{
   width: 50px;
   height: 50px;
-  margin-right: 10px;
+  margin-right: 7px;
 }
 .box-select:hover{
   opacity: 0.7;
@@ -285,6 +286,11 @@ textarea{
   .share-text > div:nth-child(1){
     width: 100%;
     padding: 0.5em;
-    height: 300px;
+    min-height: 300px;
+  }
+  .box-select{
+    width: 35px;
+    height: 35px;
+    margin-right: 6px;
   }
 }

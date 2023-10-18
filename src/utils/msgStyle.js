@@ -1,5 +1,5 @@
 const emptyStyle = {
-    height: '340px',
+    height: '220px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

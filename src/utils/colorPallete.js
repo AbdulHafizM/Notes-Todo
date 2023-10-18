@@ -1,7 +1,15 @@
 const ColorPallete = [
     {
+        backgroundColor: '#1c1d1f',
+        color: '#fff'
+    },
+    {
         backgroundColor: '#34B7F1',
         color: '#fff'
+    },
+    {
+        backgroundColor: '#fff',
+        color: '#000'
     },
     {
         backgroundColor: '#128C7E',
