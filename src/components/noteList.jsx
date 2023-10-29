@@ -2,7 +2,7 @@ import axios from 'axios';
 import useSWR from 'swr';
 import NoteCard from './Note-card';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import emptyStyle from './utils/msgStyle';
+import emptyStyle from '../utils/msgStyle';
 const fetcher = url => axios.get(url).then(({data}) => data);
 
 const NoteList = () => {

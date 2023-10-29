@@ -1,8 +1,8 @@
-import './App.css';
+import '../App.css';
 import { useState, useContext} from 'react';
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom'
-import {notifySuccess, notifyErr, notifyPromise} from './utils/notify';
+import {notifySuccess, notifyErr, notifyPromise} from '../utils/notify';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckIcon from '@mui/icons-material/Check';
 const topStyle = {

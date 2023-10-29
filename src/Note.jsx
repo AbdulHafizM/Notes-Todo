@@ -1,12 +1,11 @@
 import { Suspense, useEffect, useState} from "react"
-import NoteCard from "./Note-card"
-import SearchBar from "./searchBar"
 import { Link } from "react-router-dom"
-import NoteList from "./noteList"
+import NoteList from "./components/noteList"
 import searchIcon from './search.svg'
 import SearchList from "./components/searchList"
 import NotesIcon from '@mui/icons-material/Notes';
 import emptyStyle from "./utils/msgStyle"
+import ErrorBoundary from "./utils/errorBoundary"
 
 
 const Note = () => {
@@ -34,12 +33,17 @@ const Note = () => {
             <div className="res-container">
             {
                 searchTerm !== ''?
+                <ErrorBoundary fallback={<span style={emptyStyle}>An error occured</span>}>
                 <Suspense fallback={<span style={emptyStyle}>Searching...</span>}>
                     <SearchList searchTerm={searchTerm}/>
-                </Suspense> : 
-                <Suspense fallback={<span style={emptyStyle}>Getting notes...</span>}>
+                </Suspense>
+                </ErrorBoundary> : 
+                <ErrorBoundary>
+                <Suspense fallback={<span style={emptyStyle}>An error occured</span>}>
                     <NoteList />
                 </Suspense>
+                </ErrorBoundary>
+    
             }
             </div>
             

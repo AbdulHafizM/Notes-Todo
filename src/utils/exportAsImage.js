@@ -1,26 +1,18 @@
 import html2canvas from "html2canvas";
 
 const exportAsImage = async (element) => {
-    const html = document.getElementsByTagName("html")[0];
-    const body = document.getElementsByTagName("body")[0];
-    let htmlWidth = html.clientWidth;
-    let bodyWidth = body.clientWidth;
-
-    const newWidth = element.scrollWidth - element.clientWidth;
-
-    if (newWidth > element.clientWidth) {
-        htmlWidth += newWidth;
-        bodyWidth += newWidth;
+    let height = element.clientHeight
+ 
+    if(element.scrollHeight > element.clientHeight){
+        height = element.scrollHeight
     }
 
-    html.style.width = htmlWidth + "px";
-    body.style.width = bodyWidth + "px";
+    element.style.height = height + 'px'
 
     const canvas = await html2canvas(element);
+    element.style.height = null
     const image = canvas.toDataURL("image/png", 1.0);
     return image
-    html.style.width = null;
-    body.style.width = null;
 };
 
 const shareImage = async(blob, imageFileName) => {
@@ -44,7 +36,6 @@ const shareImage = async(blob, imageFileName) => {
 }
 
 const downloadImage = (blob, fileName) => {
-    console.log(blob)
     const fakeLink = window.document.createElement("a");
     fakeLink.style = "display:none;";
     fakeLink.download = fileName;

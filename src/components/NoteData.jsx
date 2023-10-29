@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react';
-import './App.css'
+import '../App.css'
 import axios from 'axios';
 import useSWR from 'swr';
 import { Link } from 'react-router-dom';
-import { modalContext } from './App';
-import Modal from './components/Modal';
-import { notifySuccess, notifyErr, notifyPromise } from './utils/notify';
-import {dateFormatter, timeFormatter} from './utils/dateFormatter';
+import { modalContext } from '../App';
+import Modal from './Modal';
+import { notifySuccess, notifyErr, notifyPromise } from '../utils/notify';
+import {dateFormatter, timeFormatter} from '../utils/dateFormatter';
 import CheckIcon from '@mui/icons-material/Check';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -29,7 +29,6 @@ const NoteData = ({id}) => {
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     const [title, setTitle] = useState(noteData?.note.title)
     const [body, setBody] = useState(noteData?.note.body)
-    console.log(title)
     const handleSubmit = async() => {
         const sendData = async() => {
             await axios.patch(`/api/v1/notes/${id}`, {title: title, body: body})

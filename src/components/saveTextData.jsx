@@ -4,14 +4,24 @@ import useSWR from "swr";
 import '../App.css'
 import {exportAsImage,downloadImage, shareImage} from "../utils/exportAsImage";
 import ColorPallete from "../utils/colorPallete";
-import '../App.css'
 import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
+
 
 const fetcher = url => axios.get(url).then(({data}) => data);
 
 const SaveTextData = ({id}) => {
     const exportRef = useRef()
+    const randomStr = (length) => {
+        const characters ='xyzghjdukodjs0123456789';
+        let result = ' ';
+        const charactersLength = characters.length;
+        for ( let i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+
+        return result;
+    }
     const { data: noteData } = useSWR(`/api/v1/notes/${id}`, fetcher, { suspense: true});
     return(
         <div className="share-text">
@@ -46,11 +56,11 @@ const SaveTextData = ({id}) => {
                     }}><ShareIcon sx={{color: '#fff'}}/>Share as text</button>
                 <button className='btn-flex' onClick={async()=> {
                     const blob = await exportAsImage(exportRef.current)
-                    shareImage(blob, 'note.png')
+                    shareImage(blob, `note_${randomStr(6)}.png`)
                     }}><ShareIcon sx={{color: '#fff'}}/>Share as image</button>
                 <button className='btn-flex' onClick={async() => {
                     const blob = await exportAsImage(exportRef.current)
-                    downloadImage(blob, 'note')
+                    downloadImage(blob, `note_${randomStr(6)}`)
                     }}><DownloadIcon sx={{color: '#fff'}}/>Download image</button>
             </div>
         </div>

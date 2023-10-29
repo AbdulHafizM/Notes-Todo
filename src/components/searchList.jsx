@@ -1,6 +1,6 @@
 import axios from 'axios';
 import useSWR from 'swr';
-import NoteCard from '../Note-card';
+import NoteCard from './Note-card';
 import emptyStyle from '../utils/msgStyle';
 
 const fetcher = url => axios.get(url).then(({data}) => data);
