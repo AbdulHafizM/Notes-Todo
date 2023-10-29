@@ -8,12 +8,10 @@ import ErrorBoundary from "../utils/errorBoundary";
 
 const DisplayNote = () => {
     const {NoteId} = useParams()
-    return(
-        <ErrorBoundary fallback={<span style={emptyStyle}>An error occured</span>}>
+    return(  
         <Suspense fallback={<p style={emptyStyle}>Loading data....</p>}> 
             <NoteData id={NoteId}/>
         </Suspense>
-        </ErrorBoundary>
     )
 }
 
